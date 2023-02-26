@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruiyi.modules.mapper.DocDeliveryMapper">
+    
+    <resultMap type="DocDelivery" id="DocDeliveryResult">
+        <result property="deliveryId"    column="delivery_id"    />
+        <result property="auditDate"    column="audit_date"    />
+        <result property="businessType"    column="business_type"    />
+        <result property="documentSource"    column="document_source"    />
+        <result property="productNo"    column="product_no"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="warehouseCode"    column="warehouse_code"    />
+        <result property="warehouseName"    column="warehouse_name"    />
+        <result property="deliveryDate"    column="delivery_date"    />
+        <result property="deliveryNum"    column="delivery_num"    />
+        <result property="deliveryType"    column="delivery_type"    />
+        <result property="dept"    column="dept"    />
+        <result property="documenter"    column="documenter"    />
+        <result property="auditor"    column="auditor"    />
+        <result property="remarks"    column="remarks"    />
+        <result property="materialCode"    column="material_code"    />
+        <result property="materialName"    column="material_name"    />
+        <result property="specificateMode"    column="specificate_mode"    />
+        <result property="measureUnit"    column="measure_unit"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="price"    column="price"    />
+        <result property="amount"    column="amount"    />
+        <result property="serviceNum"    column="service_num"    />
+        <result property="bigclassCode"    column="bigclass_code"    />
+        <result property="makingTime"    column="making_time"    />
+        <result property="productCode"    column="product_code"    />
+        <result property="product"    column="product"    />
+        <result property="deliveryTypeCode"    column="delivery_type_code"    />
+        <result property="materialType"    column="material_type"    />
+    </resultMap>
+
+    <sql id="selectDocDeliveryVo">
+        select delivery_id, audit_date, business_type, document_source, product_no, order_num, warehouse_code, warehouse_name, delivery_date, delivery_num, delivery_type, dept, documenter, auditor, remarks, material_code, material_name, specificate_mode, measure_unit, batch_number, quantity, price, amount, service_num, bigclass_code, making_time, product_code, product, delivery_type_code, material_type from doc_delivery
+    </sql>
+
+    <select id="selectDocDeliveryList" parameterType="DocDelivery" resultMap="DocDeliveryResult">
+        <include refid="selectDocDeliveryVo"/>
+        <where>  
+            <if test="auditDate != null  and auditDate != ''"> and audit_date = #{auditDate}</if>
+            <if test="businessType != null  and businessType != ''"> and business_type = #{businessType}</if>
+            <if test="documentSource != null  and documentSource != ''"> and document_source = #{documentSource}</if>
+            <if test="productNo != null  and productNo != ''"> and product_no = #{productNo}</if>
+            <if test="orderNum != null  and orderNum != ''"> and order_num = #{orderNum}</if>
+            <if test="warehouseCode != null  and warehouseCode != ''"> and warehouse_code = #{warehouseCode}</if>
+            <if test="warehouseName != null  and warehouseName != ''"> and warehouse_name like concat('%', #{warehouseName}, '%')</if>
+            <if test="deliveryDate != null  and deliveryDate != ''"> and delivery_date = #{deliveryDate}</if>
+            <if test="deliveryNum != null  and deliveryNum != ''"> and delivery_num = #{deliveryNum}</if>
+            <if test="deliveryType != null  and deliveryType != ''"> and delivery_type = #{deliveryType}</if>
+            <if test="dept != null  and dept != ''"> and dept = #{dept}</if>
+            <if test="documenter != null  and documenter != ''"> and documenter = #{documenter}</if>
+            <if test="auditor != null  and auditor != ''"> and auditor = #{auditor}</if>
+            <if test="remarks != null  and remarks != ''"> and remarks = #{remarks}</if>
+            <if test="materialCode != null  and materialCode != ''"> and material_code = #{materialCode}</if>
+            <if test="materialName != null  and materialName != ''"> and material_name like concat('%', #{materialName}, '%')</if>
+            <if test="specificateMode != null  and specificateMode != ''"> and specificate_mode = #{specificateMode}</if>
+            <if test="measureUnit != null  and measureUnit != ''"> and measure_unit = #{measureUnit}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="quantity != null  and quantity != ''"> and quantity = #{quantity}</if>
+            <if test="price != null  and price != ''"> and price = #{price}</if>
+            <if test="amount != null  and amount != ''"> and amount = #{amount}</if>
+            <if test="serviceNum != null  and serviceNum != ''"> and service_num = #{serviceNum}</if>
+            <if test="bigclassCode != null  and bigclassCode != ''"> and bigclass_code = #{bigclassCode}</if>
+            <if test="makingTime != null  and makingTime != ''"> and making_time = #{makingTime}</if>
+            <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
+            <if test="product != null  and product != ''"> and product = #{product}</if>
+            <if test="deliveryTypeCode != null  and deliveryTypeCode != ''"> and delivery_type_code = #{deliveryTypeCode}</if>
+            <if test="materialType != null "> and material_type = #{materialType}</if>
+        </where>
+    </select>
+    
+    <select id="selectDocDeliveryByDeliveryId" parameterType="Long" resultMap="DocDeliveryResult">
+        <include refid="selectDocDeliveryVo"/>
+        where delivery_id = #{deliveryId}
+    </select>
+        
+    <insert id="insertDocDelivery" parameterType="DocDelivery" useGeneratedKeys="true" keyProperty="deliveryId">
+        insert into doc_delivery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="auditDate != null">audit_date,</if>
+            <if test="businessType != null">business_type,</if>
+            <if test="documentSource != null">document_source,</if>
+            <if test="productNo != null">product_no,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="warehouseCode != null">warehouse_code,</if>
+            <if test="warehouseName != null">warehouse_name,</if>
+            <if test="deliveryDate != null">delivery_date,</if>
+            <if test="deliveryNum != null">delivery_num,</if>
+            <if test="deliveryType != null">delivery_type,</if>
+            <if test="dept != null">dept,</if>
+            <if test="documenter != null">documenter,</if>
+            <if test="auditor != null">auditor,</if>
+            <if test="remarks != null">remarks,</if>
+            <if test="materialCode != null">material_code,</if>
+            <if test="materialName != null">material_name,</if>
+            <if test="specificateMode != null">specificate_mode,</if>
+            <if test="measureUnit != null">measure_unit,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="price != null">price,</if>
+            <if test="amount != null">amount,</if>
+            <if test="serviceNum != null">service_num,</if>
+            <if test="bigclassCode != null">bigclass_code,</if>
+            <if test="makingTime != null">making_time,</if>
+            <if test="productCode != null">product_code,</if>
+            <if test="product != null">product,</if>
+            <if test="deliveryTypeCode != null">delivery_type_code,</if>
+            <if test="materialType != null">material_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="auditDate != null">#{auditDate},</if>
+            <if test="businessType != null">#{businessType},</if>
+            <if test="documentSource != null">#{documentSource},</if>
+            <if test="productNo != null">#{productNo},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="warehouseCode != null">#{warehouseCode},</if>
+            <if test="warehouseName != null">#{warehouseName},</if>
+            <if test="deliveryDate != null">#{deliveryDate},</if>
+            <if test="deliveryNum != null">#{deliveryNum},</if>
+            <if test="deliveryType != null">#{deliveryType},</if>
+            <if test="dept != null">#{dept},</if>
+            <if test="documenter != null">#{documenter},</if>
+            <if test="auditor != null">#{auditor},</if>
+            <if test="remarks != null">#{remarks},</if>
+            <if test="materialCode != null">#{materialCode},</if>
+            <if test="materialName != null">#{materialName},</if>
+            <if test="specificateMode != null">#{specificateMode},</if>
+            <if test="measureUnit != null">#{measureUnit},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="price != null">#{price},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="serviceNum != null">#{serviceNum},</if>
+            <if test="bigclassCode != null">#{bigclassCode},</if>
+            <if test="makingTime != null">#{makingTime},</if>
+            <if test="productCode != null">#{productCode},</if>
+            <if test="product != null">#{product},</if>
+            <if test="deliveryTypeCode != null">#{deliveryTypeCode},</if>
+            <if test="materialType != null">#{materialType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDocDelivery" parameterType="DocDelivery">
+        update doc_delivery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="auditDate != null">audit_date = #{auditDate},</if>
+            <if test="businessType != null">business_type = #{businessType},</if>
+            <if test="documentSource != null">document_source = #{documentSource},</if>
+            <if test="productNo != null">product_no = #{productNo},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="warehouseCode != null">warehouse_code = #{warehouseCode},</if>
+            <if test="warehouseName != null">warehouse_name = #{warehouseName},</if>
+            <if test="deliveryDate != null">delivery_date = #{deliveryDate},</if>
+            <if test="deliveryNum != null">delivery_num = #{deliveryNum},</if>
+            <if test="deliveryType != null">delivery_type = #{deliveryType},</if>
+            <if test="dept != null">dept = #{dept},</if>
+            <if test="documenter != null">documenter = #{documenter},</if>
+            <if test="auditor != null">auditor = #{auditor},</if>
+            <if test="remarks != null">remarks = #{remarks},</if>
+            <if test="materialCode != null">material_code = #{materialCode},</if>
+            <if test="materialName != null">material_name = #{materialName},</if>
+            <if test="specificateMode != null">specificate_mode = #{specificateMode},</if>
+            <if test="measureUnit != null">measure_unit = #{measureUnit},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="serviceNum != null">service_num = #{serviceNum},</if>
+            <if test="bigclassCode != null">bigclass_code = #{bigclassCode},</if>
+            <if test="makingTime != null">making_time = #{makingTime},</if>
+            <if test="productCode != null">product_code = #{productCode},</if>
+            <if test="product != null">product = #{product},</if>
+            <if test="deliveryTypeCode != null">delivery_type_code = #{deliveryTypeCode},</if>
+            <if test="materialType != null">material_type = #{materialType},</if>
+        </trim>
+        where delivery_id = #{deliveryId}
+    </update>
+
+    <delete id="deleteDocDeliveryByDeliveryId" parameterType="Long">
+        delete from doc_delivery where delivery_id = #{deliveryId}
+    </delete>
+
+    <delete id="deleteDocDeliveryByDeliveryIds" parameterType="String">
+        delete from doc_delivery where delivery_id in 
+        <foreach item="deliveryId" collection="array" open="(" separator="," close=")">
+            #{deliveryId}
+        </foreach>
+    </delete>
+</mapper>

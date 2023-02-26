@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruiyi.modules.mapper.CalConstituteMapper">
+    
+    <resultMap type="CalConstitute" id="CalConstituteResult">
+        <result property="constituteId"    column="constitute_id"    />
+        <result property="constituteCode"    column="constitute_code"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="amount"    column="amount"    />
+        <result property="materialProp"    column="material_prop"    />
+        <result property="manualProp"    column="manual_prop"    />
+        <result property="productFeeProp"    column="product_fee_prop"    />
+        <result property="materialFee"    column="material_fee"    />
+        <result property="manualFee"    column="manual_fee"    />
+        <result property="productFee"    column="product_fee"    />
+        <result property="materialType"    column="material_type"    />
+    </resultMap>
+
+    <sql id="selectCalConstituteVo">
+        select constitute_id, constitute_code, batch_number, amount, material_prop, manual_prop, product_fee_prop, material_fee, manual_fee, product_fee, material_type from cal_constitute
+    </sql>
+
+    <select id="selectCalConstituteList" parameterType="CalConstitute" resultMap="CalConstituteResult">
+        <include refid="selectCalConstituteVo"/>
+        <where>  
+            <if test="constituteCode != null  and constituteCode != ''"> and constitute_code = #{constituteCode}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="materialProp != null "> and material_prop = #{materialProp}</if>
+            <if test="manualProp != null "> and manual_prop = #{manualProp}</if>
+            <if test="productFeeProp != null "> and product_fee_prop = #{productFeeProp}</if>
+            <if test="materialFee != null "> and material_fee = #{materialFee}</if>
+            <if test="manualFee != null "> and manual_fee = #{manualFee}</if>
+            <if test="productFee != null "> and product_fee = #{productFee}</if>
+            <if test="materialType != null "> and material_type = #{materialType}</if>
+        </where>
+    </select>
+    
+    <select id="selectCalConstituteByConstituteId" parameterType="Long" resultMap="CalConstituteResult">
+        <include refid="selectCalConstituteVo"/>
+        where constitute_id = #{constituteId}
+    </select>
+        
+    <insert id="insertCalConstitute" parameterType="CalConstitute" useGeneratedKeys="true" keyProperty="constituteId">
+        insert into cal_constitute
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="constituteCode != null">constitute_code,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="amount != null">amount,</if>
+            <if test="materialProp != null">material_prop,</if>
+            <if test="manualProp != null">manual_prop,</if>
+            <if test="productFeeProp != null">product_fee_prop,</if>
+            <if test="materialFee != null">material_fee,</if>
+            <if test="manualFee != null">manual_fee,</if>
+            <if test="productFee != null">product_fee,</if>
+            <if test="materialType != null">material_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="constituteCode != null">#{constituteCode},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="materialProp != null">#{materialProp},</if>
+            <if test="manualProp != null">#{manualProp},</if>
+            <if test="productFeeProp != null">#{productFeeProp},</if>
+            <if test="materialFee != null">#{materialFee},</if>
+            <if test="manualFee != null">#{manualFee},</if>
+            <if test="productFee != null">#{productFee},</if>
+            <if test="materialType != null">#{materialType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCalConstitute" parameterType="CalConstitute">
+        update cal_constitute
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="constituteCode != null">constitute_code = #{constituteCode},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="materialProp != null">material_prop = #{materialProp},</if>
+            <if test="manualProp != null">manual_prop = #{manualProp},</if>
+            <if test="productFeeProp != null">product_fee_prop = #{productFeeProp},</if>
+            <if test="materialFee != null">material_fee = #{materialFee},</if>
+            <if test="manualFee != null">manual_fee = #{manualFee},</if>
+            <if test="productFee != null">product_fee = #{productFee},</if>
+            <if test="materialType != null">material_type = #{materialType},</if>
+        </trim>
+        where constitute_id = #{constituteId}
+    </update>
+
+    <delete id="deleteCalConstituteByConstituteId" parameterType="Long">
+        delete from cal_constitute where constitute_id = #{constituteId}
+    </delete>
+
+    <delete id="deleteCalConstituteByConstituteIds" parameterType="String">
+        delete from cal_constitute where constitute_id in 
+        <foreach item="constituteId" collection="array" open="(" separator="," close=")">
+            #{constituteId}
+        </foreach>
+    </delete>
+</mapper>

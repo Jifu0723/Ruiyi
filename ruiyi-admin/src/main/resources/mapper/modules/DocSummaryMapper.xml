@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruiyi.modules.mapper.DocSummaryMapper">
+    
+    <resultMap type="DocSummary" id="DocSummaryResult">
+        <result property="summaryId"    column="summary_id"    />
+        <result property="closingYear"    column="closing_year"    />
+        <result property="closingPeriod"    column="closing_period"    />
+        <result property="costcenterNo"    column="costcenter_no"    />
+        <result property="costcenterName"    column="costcenter_name"    />
+        <result property="closingOrdingNo"    column="closing_ording_no"    />
+        <result property="closingOrdingLinenumber"    column="closing_ording_linenumber"    />
+        <result property="closingProductNo"    column="closing_product_no"    />
+        <result property="closingProductName"    column="closing_product_name"    />
+        <result property="closingOutput"    column="closing_output"    />
+        <result property="closingMaterialcost"    column="closing_materialcost"    />
+        <result property="closingLaborcost"    column="closing_laborcost"    />
+        <result property="closingManufacturingcost"    column="closing_manufacturingcost"    />
+        <result property="closingTotalcost"    column="closing_totalcost"    />
+        <result property="closingUnitcost"    column="closing_unitcost"    />
+        <result property="materialCode"    column="material_code"    />
+        <result property="productCode"    column="product_code"    />
+        <result property="materialType"    column="material_type"    />
+    </resultMap>
+
+    <sql id="selectDocSummaryVo">
+        select summary_id, closing_year, closing_period, costcenter_no, costcenter_name, closing_ording_no, closing_ording_linenumber, closing_product_no, closing_product_name, closing_output, closing_materialcost, closing_laborcost, closing_manufacturingcost, closing_totalcost, closing_unitcost, material_code, product_code, material_type from doc_summary
+    </sql>
+
+    <select id="selectDocSummaryList" parameterType="DocSummary" resultMap="DocSummaryResult">
+        <include refid="selectDocSummaryVo"/>
+        <where>  
+            <if test="closingYear != null  and closingYear != ''"> and closing_year = #{closingYear}</if>
+            <if test="closingPeriod != null  and closingPeriod != ''"> and closing_period = #{closingPeriod}</if>
+            <if test="costcenterNo != null  and costcenterNo != ''"> and costcenter_no = #{costcenterNo}</if>
+            <if test="costcenterName != null  and costcenterName != ''"> and costcenter_name like concat('%', #{costcenterName}, '%')</if>
+            <if test="closingOrdingNo != null  and closingOrdingNo != ''"> and closing_ording_no = #{closingOrdingNo}</if>
+            <if test="closingOrdingLinenumber != null  and closingOrdingLinenumber != ''"> and closing_ording_linenumber = #{closingOrdingLinenumber}</if>
+            <if test="closingProductNo != null  and closingProductNo != ''"> and closing_product_no = #{closingProductNo}</if>
+            <if test="closingProductName != null  and closingProductName != ''"> and closing_product_name like concat('%', #{closingProductName}, '%')</if>
+            <if test="closingOutput != null "> and closing_output = #{closingOutput}</if>
+            <if test="closingMaterialcost != null "> and closing_materialcost = #{closingMaterialcost}</if>
+            <if test="closingLaborcost != null "> and closing_laborcost = #{closingLaborcost}</if>
+            <if test="closingManufacturingcost != null "> and closing_manufacturingcost = #{closingManufacturingcost}</if>
+            <if test="closingTotalcost != null "> and closing_totalcost = #{closingTotalcost}</if>
+            <if test="closingUnitcost != null "> and closing_unitcost = #{closingUnitcost}</if>
+            <if test="materialCode != null  and materialCode != ''"> and material_code = #{materialCode}</if>
+            <if test="productCode != null  and productCode != ''"> and product_code = #{productCode}</if>
+            <if test="materialType != null "> and material_type = #{materialType}</if>
+        </where>
+    </select>
+    
+    <select id="selectDocSummaryBySummaryId" parameterType="Long" resultMap="DocSummaryResult">
+        <include refid="selectDocSummaryVo"/>
+        where summary_id = #{summaryId}
+    </select>
+        
+    <insert id="insertDocSummary" parameterType="DocSummary" useGeneratedKeys="true" keyProperty="summaryId">
+        insert into doc_summary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="closingYear != null">closing_year,</if>
+            <if test="closingPeriod != null">closing_period,</if>
+            <if test="costcenterNo != null">costcenter_no,</if>
+            <if test="costcenterName != null">costcenter_name,</if>
+            <if test="closingOrdingNo != null">closing_ording_no,</if>
+            <if test="closingOrdingLinenumber != null">closing_ording_linenumber,</if>
+            <if test="closingProductNo != null">closing_product_no,</if>
+            <if test="closingProductName != null">closing_product_name,</if>
+            <if test="closingOutput != null">closing_output,</if>
+            <if test="closingMaterialcost != null">closing_materialcost,</if>
+            <if test="closingLaborcost != null">closing_laborcost,</if>
+            <if test="closingManufacturingcost != null">closing_manufacturingcost,</if>
+            <if test="closingTotalcost != null">closing_totalcost,</if>
+            <if test="closingUnitcost != null">closing_unitcost,</if>
+            <if test="materialCode != null">material_code,</if>
+            <if test="productCode != null">product_code,</if>
+            <if test="materialType != null">material_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="closingYear != null">#{closingYear},</if>
+            <if test="closingPeriod != null">#{closingPeriod},</if>
+            <if test="costcenterNo != null">#{costcenterNo},</if>
+            <if test="costcenterName != null">#{costcenterName},</if>
+            <if test="closingOrdingNo != null">#{closingOrdingNo},</if>
+            <if test="closingOrdingLinenumber != null">#{closingOrdingLinenumber},</if>
+            <if test="closingProductNo != null">#{closingProductNo},</if>
+            <if test="closingProductName != null">#{closingProductName},</if>
+            <if test="closingOutput != null">#{closingOutput},</if>
+            <if test="closingMaterialcost != null">#{closingMaterialcost},</if>
+            <if test="closingLaborcost != null">#{closingLaborcost},</if>
+            <if test="closingManufacturingcost != null">#{closingManufacturingcost},</if>
+            <if test="closingTotalcost != null">#{closingTotalcost},</if>
+            <if test="closingUnitcost != null">#{closingUnitcost},</if>
+            <if test="materialCode != null">#{materialCode},</if>
+            <if test="productCode != null">#{productCode},</if>
+            <if test="materialType != null">#{materialType},</if>
+         </trim>
+    </insert>
+    <insert id="insertDocSummarys">
+
+    </insert>
+
+    <update id="updateDocSummary" parameterType="DocSummary">
+        update doc_summary
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="closingYear != null">closing_year = #{closingYear},</if>
+            <if test="closingPeriod != null">closing_period = #{closingPeriod},</if>
+            <if test="costcenterNo != null">costcenter_no = #{costcenterNo},</if>
+            <if test="costcenterName != null">costcenter_name = #{costcenterName},</if>
+            <if test="closingOrdingNo != null">closing_ording_no = #{closingOrdingNo},</if>
+            <if test="closingOrdingLinenumber != null">closing_ording_linenumber = #{closingOrdingLinenumber},</if>
+            <if test="closingProductNo != null">closing_product_no = #{closingProductNo},</if>
+            <if test="closingProductName != null">closing_product_name = #{closingProductName},</if>
+            <if test="closingOutput != null">closing_output = #{closingOutput},</if>
+            <if test="closingMaterialcost != null">closing_materialcost = #{closingMaterialcost},</if>
+            <if test="closingLaborcost != null">closing_laborcost = #{closingLaborcost},</if>
+            <if test="closingManufacturingcost != null">closing_manufacturingcost = #{closingManufacturingcost},</if>
+            <if test="closingTotalcost != null">closing_totalcost = #{closingTotalcost},</if>
+            <if test="closingUnitcost != null">closing_unitcost = #{closingUnitcost},</if>
+            <if test="materialCode != null">material_code = #{materialCode},</if>
+            <if test="productCode != null">product_code = #{productCode},</if>
+            <if test="materialType != null">material_type = #{materialType},</if>
+        </trim>
+        where summary_id = #{summaryId}
+    </update>
+
+    <delete id="deleteDocSummaryBySummaryId" parameterType="Long">
+        delete from doc_summary where summary_id = #{summaryId}
+    </delete>
+
+    <delete id="deleteDocSummaryBySummaryIds" parameterType="String">
+        delete from doc_summary where summary_id in 
+        <foreach item="summaryId" collection="array" open="(" separator="," close=")">
+            #{summaryId}
+        </foreach>
+    </delete>
+</mapper>

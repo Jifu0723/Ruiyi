@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruiyi.modules.mapper.TbStorageMapper">
+    
+    <resultMap type="TbStorage" id="TbStorageResult">
+        <result property="  storageId"    column="  storage_id"    />
+        <result property="produceOrderNo"    column="produce_order_no"    />
+        <result property="produceRowNo"    column="produce_row_no"    />
+        <result property="chectData"    column="chect_data"    />
+        <result property="storageName"    column="storage_name"    />
+        <result property="storageStoreId"    column="storage_store_id"    />
+        <result property="storageStore"    column="storage_store"    />
+        <result property="storageData"    column="storage_data"    />
+        <result property="storageSingleId"    column="storage_single_id"    />
+        <result property="storageType"    column="storage_type"    />
+        <result property="storageDepart"    column="storage_depart"    />
+        <result property="storageOrderName"    column="storage_order_name"    />
+        <result property="chectName"    column="chect_name"    />
+        <result property="storageNote"    column="storage_note"    />
+        <result property="produceCode"    column="produce_code"    />
+        <result property="produceName"    column="produce_name"    />
+        <result property="produceModel"    column="produce_model"    />
+        <result property="produceNum"    column="produce_num"    />
+        <result property="produceMoney"    column="produce_money"    />
+        <result property="produceTotalMoney"    column="produce_total_money"    />
+        <result property="producePackageId"    column="produce_package_id"    />
+        <result property="produceSourceId"    column="produce_source_id"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="produceData"    column="produce_data"    />
+        <result property="materialType"    column="material_type"    />
+    </resultMap>
+
+    <sql id="selectTbStorageVo">
+        select   storage_id, produce_order_no, produce_row_no, chect_data, storage_name, storage_store_id, storage_store, storage_data, storage_single_id, storage_type, storage_depart, storage_order_name, chect_name, storage_note, produce_code, produce_name, produce_model, produce_num, produce_money, produce_total_money, produce_package_id, produce_source_id, batch_number, produce_data, material_type from tb_storage
+    </sql>
+
+    <select id="selectTbStorageList" parameterType="TbStorage" resultMap="TbStorageResult">
+        <include refid="selectTbStorageVo"/>
+        <where>  
+            <if test="produceOrderNo != null  and produceOrderNo != ''"> and produce_order_no = #{produceOrderNo}</if>
+            <if test="produceRowNo != null  and produceRowNo != ''"> and produce_row_no = #{produceRowNo}</if>
+            <if test="chectData != null "> and chect_data = #{chectData}</if>
+            <if test="storageName != null  and storageName != ''"> and storage_name like concat('%', #{storageName}, '%')</if>
+            <if test="storageStoreId != null  and storageStoreId != ''"> and storage_store_id = #{storageStoreId}</if>
+            <if test="storageStore != null  and storageStore != ''"> and storage_store = #{storageStore}</if>
+            <if test="storageData != null "> and storage_data = #{storageData}</if>
+            <if test="storageSingleId != null  and storageSingleId != ''"> and storage_single_id = #{storageSingleId}</if>
+            <if test="storageType != null  and storageType != ''"> and storage_type = #{storageType}</if>
+            <if test="storageDepart != null  and storageDepart != ''"> and storage_depart = #{storageDepart}</if>
+            <if test="storageOrderName != null  and storageOrderName != ''"> and storage_order_name like concat('%', #{storageOrderName}, '%')</if>
+            <if test="chectName != null  and chectName != ''"> and chect_name like concat('%', #{chectName}, '%')</if>
+            <if test="storageNote != null  and storageNote != ''"> and storage_note = #{storageNote}</if>
+            <if test="produceCode != null  and produceCode != ''"> and produce_code = #{produceCode}</if>
+            <if test="produceName != null  and produceName != ''"> and produce_name like concat('%', #{produceName}, '%')</if>
+            <if test="produceModel != null  and produceModel != ''"> and produce_model = #{produceModel}</if>
+            <if test="produceNum != null  and produceNum != ''"> and produce_num = #{produceNum}</if>
+            <if test="produceMoney != null  and produceMoney != ''"> and produce_money = #{produceMoney}</if>
+            <if test="produceTotalMoney != null  and produceTotalMoney != ''"> and produce_total_money = #{produceTotalMoney}</if>
+            <if test="producePackageId != null  and producePackageId != ''"> and produce_package_id = #{producePackageId}</if>
+            <if test="produceSourceId != null  and produceSourceId != ''"> and produce_source_id = #{produceSourceId}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="produceData != null "> and produce_data = #{produceData}</if>
+            <if test="materialType != null "> and material_type = #{materialType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbStorageBy  storageId" parameterType="Long" resultMap="TbStorageResult">
+        <include refid="selectTbStorageVo"/>
+        where   storage_id = #{  storageId}
+    </select>
+        
+    <insert id="insertTbStorage" parameterType="TbStorage" useGeneratedKeys="true" keyProperty="  storageId">
+        insert into tb_storage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="produceOrderNo != null">produce_order_no,</if>
+            <if test="produceRowNo != null">produce_row_no,</if>
+            <if test="chectData != null">chect_data,</if>
+            <if test="storageName != null">storage_name,</if>
+            <if test="storageStoreId != null">storage_store_id,</if>
+            <if test="storageStore != null">storage_store,</if>
+            <if test="storageData != null">storage_data,</if>
+            <if test="storageSingleId != null">storage_single_id,</if>
+            <if test="storageType != null">storage_type,</if>
+            <if test="storageDepart != null">storage_depart,</if>
+            <if test="storageOrderName != null">storage_order_name,</if>
+            <if test="chectName != null">chect_name,</if>
+            <if test="storageNote != null">storage_note,</if>
+            <if test="produceCode != null">produce_code,</if>
+            <if test="produceName != null">produce_name,</if>
+            <if test="produceModel != null">produce_model,</if>
+            <if test="produceNum != null">produce_num,</if>
+            <if test="produceMoney != null">produce_money,</if>
+            <if test="produceTotalMoney != null">produce_total_money,</if>
+            <if test="producePackageId != null">produce_package_id,</if>
+            <if test="produceSourceId != null">produce_source_id,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="produceData != null">produce_data,</if>
+            <if test="materialType != null">material_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="produceOrderNo != null">#{produceOrderNo},</if>
+            <if test="produceRowNo != null">#{produceRowNo},</if>
+            <if test="chectData != null">#{chectData},</if>
+            <if test="storageName != null">#{storageName},</if>
+            <if test="storageStoreId != null">#{storageStoreId},</if>
+            <if test="storageStore != null">#{storageStore},</if>
+            <if test="storageData != null">#{storageData},</if>
+            <if test="storageSingleId != null">#{storageSingleId},</if>
+            <if test="storageType != null">#{storageType},</if>
+            <if test="storageDepart != null">#{storageDepart},</if>
+            <if test="storageOrderName != null">#{storageOrderName},</if>
+            <if test="chectName != null">#{chectName},</if>
+            <if test="storageNote != null">#{storageNote},</if>
+            <if test="produceCode != null">#{produceCode},</if>
+            <if test="produceName != null">#{produceName},</if>
+            <if test="produceModel != null">#{produceModel},</if>
+            <if test="produceNum != null">#{produceNum},</if>
+            <if test="produceMoney != null">#{produceMoney},</if>
+            <if test="produceTotalMoney != null">#{produceTotalMoney},</if>
+            <if test="producePackageId != null">#{producePackageId},</if>
+            <if test="produceSourceId != null">#{produceSourceId},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="produceData != null">#{produceData},</if>
+            <if test="materialType != null">#{materialType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbStorage" parameterType="TbStorage">
+        update tb_storage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="produceOrderNo != null">produce_order_no = #{produceOrderNo},</if>
+            <if test="produceRowNo != null">produce_row_no = #{produceRowNo},</if>
+            <if test="chectData != null">chect_data = #{chectData},</if>
+            <if test="storageName != null">storage_name = #{storageName},</if>
+            <if test="storageStoreId != null">storage_store_id = #{storageStoreId},</if>
+            <if test="storageStore != null">storage_store = #{storageStore},</if>
+            <if test="storageData != null">storage_data = #{storageData},</if>
+            <if test="storageSingleId != null">storage_single_id = #{storageSingleId},</if>
+            <if test="storageType != null">storage_type = #{storageType},</if>
+            <if test="storageDepart != null">storage_depart = #{storageDepart},</if>
+            <if test="storageOrderName != null">storage_order_name = #{storageOrderName},</if>
+            <if test="chectName != null">chect_name = #{chectName},</if>
+            <if test="storageNote != null">storage_note = #{storageNote},</if>
+            <if test="produceCode != null">produce_code = #{produceCode},</if>
+            <if test="produceName != null">produce_name = #{produceName},</if>
+            <if test="produceModel != null">produce_model = #{produceModel},</if>
+            <if test="produceNum != null">produce_num = #{produceNum},</if>
+            <if test="produceMoney != null">produce_money = #{produceMoney},</if>
+            <if test="produceTotalMoney != null">produce_total_money = #{produceTotalMoney},</if>
+            <if test="producePackageId != null">produce_package_id = #{producePackageId},</if>
+            <if test="produceSourceId != null">produce_source_id = #{produceSourceId},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="produceData != null">produce_data = #{produceData},</if>
+            <if test="materialType != null">material_type = #{materialType},</if>
+        </trim>
+        where   storage_id = #{  storageId}
+    </update>
+
+    <delete id="deleteTbStorageBy  storageId" parameterType="Long">
+        delete from tb_storage where   storage_id = #{  storageId}
+    </delete>
+
+    <delete id="deleteTbStorageBy  storageIds" parameterType="String">
+        delete from tb_storage where   storage_id in 
+        <foreach item="  storageId" collection="array" open="(" separator="," close=")">
+            #{  storageId}
+        </foreach>
+    </delete>
+</mapper>

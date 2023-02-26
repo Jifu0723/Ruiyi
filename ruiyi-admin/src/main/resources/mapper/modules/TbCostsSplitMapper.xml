@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruiyi.modules.mapper.TbCostsSplitMapper">
+    
+    <resultMap type="TbCostsSplit" id="TbCostsSplitResult">
+        <result property="cellId"    column="cell_id"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="orderNo"    column="order_no"    />
+        <result property="cellProNum"    column="cell_pro_num"    />
+        <result property="feesType"    column="fees_type"    />
+        <result property="feesNum"    column="fees_num"    />
+        <result property="feesName"    column="fees_name"    />
+        <result property="cellMoney"    column="cell_money"    />
+        <result property="cellNum"    column="cell_num"    />
+        <result property="cellUse"    column="cell_use"    />
+        <result property="cellMoneyAll"    column="cell_money_all"    />
+        <result property="cellCosts"    column="cell_costs"    />
+        <result property="proportionTotal"    column="proportion_total"    />
+        <result property="proportionProject"    column="proportion_project"    />
+        <result property="materialType"    column="material_type"    />
+    </resultMap>
+
+    <sql id="selectTbCostsSplitVo">
+        select cell_id, order_num, order_no, cell_pro_num, fees_type, fees_num, fees_name, cell_money, cell_num, cell_use, cell_money_all, cell_costs, proportion_total, proportion_project, material_type from tb_costs_split
+    </sql>
+
+    <select id="selectTbCostsSplitList" parameterType="TbCostsSplit" resultMap="TbCostsSplitResult">
+        <include refid="selectTbCostsSplitVo"/>
+        <where>  
+            <if test="orderNum != null  and orderNum != ''"> and order_num = #{orderNum}</if>
+            <if test="orderNo != null  and orderNo != ''"> and order_no = #{orderNo}</if>
+            <if test="cellProNum != null  and cellProNum != ''"> and cell_pro_num = #{cellProNum}</if>
+            <if test="feesType != null  and feesType != ''"> and fees_type = #{feesType}</if>
+            <if test="feesNum != null  and feesNum != ''"> and fees_num = #{feesNum}</if>
+            <if test="feesName != null  and feesName != ''"> and fees_name like concat('%', #{feesName}, '%')</if>
+            <if test="cellMoney != null  and cellMoney != ''"> and cell_money = #{cellMoney}</if>
+            <if test="cellNum != null  and cellNum != ''"> and cell_num = #{cellNum}</if>
+            <if test="cellUse != null  and cellUse != ''"> and cell_use = #{cellUse}</if>
+            <if test="cellMoneyAll != null  and cellMoneyAll != ''"> and cell_money_all = #{cellMoneyAll}</if>
+            <if test="cellCosts != null  and cellCosts != ''"> and cell_costs = #{cellCosts}</if>
+            <if test="proportionTotal != null  and proportionTotal != ''"> and proportion_total = #{proportionTotal}</if>
+            <if test="proportionProject != null  and proportionProject != ''"> and proportion_project = #{proportionProject}</if>
+            <if test="materialType != null "> and material_type = #{materialType}</if>
+        </where>
+    </select>
+    
+    <select id="selectTbCostsSplitByCellId" parameterType="Long" resultMap="TbCostsSplitResult">
+        <include refid="selectTbCostsSplitVo"/>
+        where cell_id = #{cellId}
+    </select>
+        
+    <insert id="insertTbCostsSplit" parameterType="TbCostsSplit" useGeneratedKeys="true" keyProperty="cellId">
+        insert into tb_costs_split
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNum != null">order_num,</if>
+            <if test="orderNo != null">order_no,</if>
+            <if test="cellProNum != null">cell_pro_num,</if>
+            <if test="feesType != null">fees_type,</if>
+            <if test="feesNum != null">fees_num,</if>
+            <if test="feesName != null">fees_name,</if>
+            <if test="cellMoney != null">cell_money,</if>
+            <if test="cellNum != null">cell_num,</if>
+            <if test="cellUse != null">cell_use,</if>
+            <if test="cellMoneyAll != null">cell_money_all,</if>
+            <if test="cellCosts != null">cell_costs,</if>
+            <if test="proportionTotal != null">proportion_total,</if>
+            <if test="proportionProject != null">proportion_project,</if>
+            <if test="materialType != null">material_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="orderNo != null">#{orderNo},</if>
+            <if test="cellProNum != null">#{cellProNum},</if>
+            <if test="feesType != null">#{feesType},</if>
+            <if test="feesNum != null">#{feesNum},</if>
+            <if test="feesName != null">#{feesName},</if>
+            <if test="cellMoney != null">#{cellMoney},</if>
+            <if test="cellNum != null">#{cellNum},</if>
+            <if test="cellUse != null">#{cellUse},</if>
+            <if test="cellMoneyAll != null">#{cellMoneyAll},</if>
+            <if test="cellCosts != null">#{cellCosts},</if>
+            <if test="proportionTotal != null">#{proportionTotal},</if>
+            <if test="proportionProject != null">#{proportionProject},</if>
+            <if test="materialType != null">#{materialType},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTbCostsSplit" parameterType="TbCostsSplit">
+        update tb_costs_split
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="orderNo != null">order_no = #{orderNo},</if>
+            <if test="cellProNum != null">cell_pro_num = #{cellProNum},</if>
+            <if test="feesType != null">fees_type = #{feesType},</if>
+            <if test="feesNum != null">fees_num = #{feesNum},</if>
+            <if test="feesName != null">fees_name = #{feesName},</if>
+            <if test="cellMoney != null">cell_money = #{cellMoney},</if>
+            <if test="cellNum != null">cell_num = #{cellNum},</if>
+            <if test="cellUse != null">cell_use = #{cellUse},</if>
+            <if test="cellMoneyAll != null">cell_money_all = #{cellMoneyAll},</if>
+            <if test="cellCosts != null">cell_costs = #{cellCosts},</if>
+            <if test="proportionTotal != null">proportion_total = #{proportionTotal},</if>
+            <if test="proportionProject != null">proportion_project = #{proportionProject},</if>
+            <if test="materialType != null">material_type = #{materialType},</if>
+        </trim>
+        where cell_id = #{cellId}
+    </update>
+
+    <delete id="deleteTbCostsSplitByCellId" parameterType="Long">
+        delete from tb_costs_split where cell_id = #{cellId}
+    </delete>
+
+    <delete id="deleteTbCostsSplitByCellIds" parameterType="String">
+        delete from tb_costs_split where cell_id in 
+        <foreach item="cellId" collection="array" open="(" separator="," close=")">
+            #{cellId}
+        </foreach>
+    </delete>
+</mapper>
